@@ -15,7 +15,6 @@ export const Listado = ({ type, dataParam }) => {
 
     const history = useHistory();
     const { id } = useParams();
-    //generarDataListado(type, id); // devuelve objeto para poner en listado
 
     let paramGet = '';
     switch (type) {
@@ -37,7 +36,6 @@ export const Listado = ({ type, dataParam }) => {
     // devuelve objeto para poner en listado
     const obj = generarDataListado(type, id, dataParam || data, history);
 
-    // if (obj) {
     return (
         <Fragment>
             <MaterialTable
@@ -49,8 +47,6 @@ export const Listado = ({ type, dataParam }) => {
             />
         </Fragment>
     );
-    // } else {
-    //document.location.reload();
 }
     ;
 

@@ -46,6 +46,9 @@ const PageRouter = () => (
       <Route path="/personajes" exact>
         <SectionWithTheme type={strings.personajes.name} />
       </Route>
+      <Route path="/asesinos" exact>
+        <SectionWithTheme type={strings.asesinos.name} />
+      </Route>
       <Route path="/temporada/:id" exact>
         <SectionWithTheme type={strings.temporadas.episodios.name} />
       </Route>
@@ -67,8 +70,6 @@ function App() {
   return (
     <ThemeSelector>
       <div className="App">
-        {/*<Users></Users>*/}
-        {/* <User></User>*/}
         <PageRouter />
       </div>
     </ThemeSelector>

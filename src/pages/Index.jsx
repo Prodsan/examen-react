@@ -1,34 +1,17 @@
-import React/*, { useContext, useEffect, useState }*/ from 'react';
-//import PropTypes from 'prop-types';
-import { /*themeContext,*/ withTheme } from './../Theme/Theme';
+import React from 'react';
+import { withTheme } from './../Theme/Theme';
 import { Link } from 'react-router-dom';
 // icons
 import { tableIcons } from '../components/icons';
 import { tools } from '../components/Tools';
 
-//import { useGetUsers } from '../hooks/users/useGetUsers';
 import { makeStyles } from '@material-ui/core/styles';
 
-
-
-
-
-
-// redux 
-// import { connect } from "react-redux";
-// import {
-//     DECREMENT,
-//     INCREMENT,
-//     increment,
-//     decrement,
-// } from "../actions/counter/counter";
-// import { bindActionCreators } from "redux";
 
 
 export const Index = ({ theme, ...props }) => {
     console.log(theme);
     console.log(props);
-    //const data = useGetUsers();
 
 
     const useStyles = makeStyles((them) => ({
@@ -49,10 +32,6 @@ export const Index = ({ theme, ...props }) => {
 
     const classes = useStyles();
 
-
-
-
-    // const context = useContext(themeContext) --> use cuando está en contexto
     return (
         <header className="App-header"
             style={{

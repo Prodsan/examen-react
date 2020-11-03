@@ -4,12 +4,12 @@ export const generarDataListado = (type, id, data, history) => {
     // me quedo con las seasons
     const listadoTemporadas = () => {
         const seasonsList = data.reduce((newTempArr, el) => ((newTempArr.includes(el.season.trim())) ? newTempArr : [...newTempArr, el.season]), []);
-        let datar = seasonsList.map((obj) => {
+        const datar = seasonsList.map((obj) => {
             return {
                 season: 'Temporada ' + obj
             }
         });
-        let actions = [
+        const actions = [
             {
                 icon: tableIcons.VisibilityIcon,
                 tooltip: "Ir a los episodios de la temporada",
@@ -18,7 +18,7 @@ export const generarDataListado = (type, id, data, history) => {
                 }
             },
         ];
-        let columns = [
+        const columns = [
             { title: 'Temporada', field: 'season' },
         ];
 
@@ -30,7 +30,7 @@ export const generarDataListado = (type, id, data, history) => {
     }
 
     const listadoEpisodios = () => {
-        let datar = data.filter((obj) => {
+        const datar = data.filter((obj) => {
             if (obj.season.trim() === id && obj.series === 'Breaking Bad') {
                 return {
                     episode: obj.episode,
@@ -41,7 +41,7 @@ export const generarDataListado = (type, id, data, history) => {
                 }
             }
         });
-        let actions = [
+        const actions = [
             {
                 icon: tableIcons.VisibilityIcon,
                 tooltip: "Ver detalles del episodio",
@@ -51,7 +51,7 @@ export const generarDataListado = (type, id, data, history) => {
                 }
             },
         ];
-        let columns = [
+        const columns = [
             { title: 'Título', field: 'title', cellStyle: { wordBreak: 'break-all' }, width: 300, },
             { title: 'Num ep', field: 'episode' },
             { title: 'Estrenado', field: 'air_date' },
@@ -67,11 +67,11 @@ export const generarDataListado = (type, id, data, history) => {
 
     const listadoPersonajesEp = () => {
         // todo: cambiar let por const
-        let datar = data.dataEpisode.map((obj) => {
+        const datar = data.dataEpisode.map((obj) => {
             let characters = obj.characters
             return characters
         });
-        let datar2 = datar.map((obj, i) => {
+        const datar2 = datar.map((obj, i) => {
             return obj.map((el) => {
                 let obj = data.dataCharacters.find(o => o.name.trim() == el.trim())
                 let index = data.dataCharacters.indexOf(obj);
@@ -84,7 +84,7 @@ export const generarDataListado = (type, id, data, history) => {
             })
         })
 
-        let actions = [
+        const actions = [
             {
                 icon: tableIcons.VisibilityIcon,
                 tooltip: "Ver detalles del personaje",
@@ -94,7 +94,7 @@ export const generarDataListado = (type, id, data, history) => {
                 }
             },
         ];
-        let columns = [
+        const columns = [
             { title: 'Nombre del personaje', field: 'nombre' },
         ];
 
@@ -106,7 +106,7 @@ export const generarDataListado = (type, id, data, history) => {
     }
 
     const listadoPersonajes = () => {
-        let actions = [
+        const actions = [
             {
                 icon: tableIcons.VisibilityIcon,
                 tooltip: "Ver detalles del personaje",
@@ -116,7 +116,7 @@ export const generarDataListado = (type, id, data, history) => {
                 }
             },
         ];
-        let columns = [
+        const columns = [
             {
                 title: 'Foto', field: 'img',
                 render: rowData => <img src={rowData.img} style={{ width: 40, borderRadius: '50%' }} />
@@ -135,7 +135,7 @@ export const generarDataListado = (type, id, data, history) => {
     }
     const listadoEpisodiosPers = () => {
 
-        let datar = data.dataEpisodiosPers.filter((obj) => {
+        const datar = data.dataEpisodiosPers.filter((obj) => {
             if (obj.characters.includes(data.dataPersonaje[0].name) && obj.series === 'Breaking Bad') {
                 return {
                     episode: obj.episode,
@@ -146,7 +146,7 @@ export const generarDataListado = (type, id, data, history) => {
             }
         });
         console.log(datar);
-        let actions = [
+        const actions = [
             {
                 icon: tableIcons.VisibilityIcon,
                 tooltip: "Ver detalles del episodio donde aparece este personaje",
@@ -156,7 +156,7 @@ export const generarDataListado = (type, id, data, history) => {
                 }
             },
         ];
-        let columns = [
+        const columns = [
             { title: 'Nombre del episodio', field: 'title' },
             { title: 'Temporada', field: 'season' },
             { title: 'Nº episodio', field: 'episode' },

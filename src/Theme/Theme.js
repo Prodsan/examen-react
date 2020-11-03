@@ -1,9 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
 
-/**
- * dark
- */
 export const themeContext = React.createContext({ dark: true });
 
 export const ThemeProvider = themeContext.Provider;

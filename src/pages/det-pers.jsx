@@ -1,10 +1,9 @@
-import React/*,{ useContext }*/ from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Listado } from '../components/Listado/Listado';
-//import useGetUsers from '../hooks/users/useGetUsers'
 import { Switch, Route } from 'react-router';
 import { useHistory, useParams } from "react-router-dom";
-import { /*themeContext, */withTheme } from '../Theme/Theme';
+import { withTheme } from '../Theme/Theme';
 import { ROOT_URLs } from '../App';
 import { useGetData } from '../hooks/useHookData';
 
@@ -14,19 +13,29 @@ export const DetPers = ({ theme }) => {
     const history = useHistory();
     const { id } = useParams();
 
-    const paramGet1 = ROOT_URLs.api + 'characters/' + id;
-    const paramGet2 = ROOT_URLs.api + 'episodes';
-    let dataPersonajes = useGetData(paramGet1);
-    let dataEpisodiosPers = useGetData(paramGet2);
+    const paramGetCharacter = ROOT_URLs.api + 'characters/' + id;
+    const paramGetEpisodes = ROOT_URLs.api + 'episodes';
+    const dataPersonajes = useGetData(paramGetCharacter);
+    const dataEpisodiosPers = useGetData(paramGetEpisodes);
+
+    let paramGetCitas = '';
+    dataPersonajes.map((el) => {
+        return paramGetCitas += ROOT_URLs.api + 'quote?author=' + el.name.replace(' ', '+');
+    }, 0)
+
+    console.log(paramGetCitas);
+
+    const obtenerCitas = useGetData(paramGetCitas);
     let data = {
         dataPersonaje: [...dataPersonajes],
-        dataEpisodiosPers: [...dataEpisodiosPers]
+        dataEpisodiosPers: [...dataEpisodiosPers],
+        citas: [...obtenerCitas]
     }
-
+    console.log(obtenerCitas);
     let info = data.dataPersonaje.map((el) => {
         return <div key={el}>
             <div class="card-header text-center">
-                Featured
+                <i>'quote here'</i>
             </div>
             <div class="card-body text-center">
                 <h3 class="badge badge-success" style={{ 'fontSize': '20px' }}>{el.category}</h3>
