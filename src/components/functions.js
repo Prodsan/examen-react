@@ -169,6 +169,42 @@ export const generarDataListado = (type, id, data, history) => {
             columns: columns
         }
     }
+    const listadoAsesinos = () => {
+
+        const datar = data.dataEpisodiosPers.filter((obj) => {
+            if (obj.characters.includes(data.dataPersonaje[0].name) && obj.series === 'Breaking Bad') {
+                return {
+                    episode: obj.episode,
+                    season: obj.season,
+                    title: obj.title,
+                    air_date: data.air_date
+                }
+            }
+        });
+        console.log(datar);
+        const actions = [
+            {
+                icon: tableIcons.VisibilityIcon,
+                tooltip: "Ver detalles del episodio donde aparece este personaje",
+                onClick: (event, rowData) => {
+                    console.log(rowData.episode_id);
+                    history.push('/ep-detalle/' + parseInt(rowData.episode_id)) // todo: poner ruta
+                }
+            },
+        ];
+        const columns = [
+            { title: 'Nombre del episodio', field: 'title' },
+            { title: 'Temporada', field: 'season' },
+            { title: 'Nº episodio', field: 'episode' },
+            { title: 'Lanzamiento del episodio', field: 'air_date' },
+        ];
+
+        return {
+            data: datar,
+            actions: actions,
+            columns: columns
+        }
+    }
 
 
 
@@ -183,6 +219,8 @@ export const generarDataListado = (type, id, data, history) => {
             return listadoPersonajes();
         case 'episodiosPers':
             return listadoEpisodiosPers();
+        case 'asesinos':
+            return listadoAsesinos();
         default:
             history.push('/temporadas');
             break;

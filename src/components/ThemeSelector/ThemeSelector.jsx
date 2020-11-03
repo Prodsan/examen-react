@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-//import PropTypes from 'prop-types';
 import { ThemeProvider } from '../../Theme/Theme'
 
 
@@ -12,7 +11,8 @@ export const ThemeSelector = ({ children }) => {
     return (
         <>
             <input type="checkbox" id="theme" checked={isDark} onChange={handleCheckbox} ></input>
-            Cambiar modo<ThemeProvider value={{ dark: isDark }}>
+            Cambiar modo
+            <ThemeProvider value={{ dark: isDark }}>
                 {children}
             </ThemeProvider>
         </>

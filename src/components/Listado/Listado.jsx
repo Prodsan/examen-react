@@ -1,7 +1,6 @@
-import React, { Fragment/*, useState*/ } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from "material-table";
-//import ReactDOM from "react-dom";
 import { useHistory, useParams } from "react-router-dom";
 // icons
 import { tableIcons } from '../icons';
@@ -19,6 +18,9 @@ export const Listado = ({ type, dataParam }) => {
     let paramGet = '';
     switch (type) {
         case 'personajes':
+            paramGet = ROOT_URLs.api + 'characters';
+            break;
+        case 'asesinos':
             paramGet = ROOT_URLs.api + 'characters';
             break;
         case 'dataPasada':

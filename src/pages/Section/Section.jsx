@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Listado } from '../../components/Listado/Listado';
-import { Switch, Route } from 'react-router';
 import { withTheme } from '../../Theme/Theme';
 
 export const Section = ({ type, theme }) => {
