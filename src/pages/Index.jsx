@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { themeContext, withTheme } from './../Theme/Theme';
+import React/*, { useContext, useEffect, useState }*/ from 'react';
+//import PropTypes from 'prop-types';
+import { /*themeContext,*/ withTheme } from './../Theme/Theme';
 import { Link } from 'react-router-dom';
 // icons
 import { tableIcons } from '../components/icons';
@@ -42,7 +42,8 @@ export const Index = ({ theme, ...props }) => {
         },
         textLink: {
             color: 'inherit',
-            textDecoration: 'inherit'
+            textDecoration: 'inherit',
+            display: 'contents'
         }
     }));
 
@@ -59,24 +60,29 @@ export const Index = ({ theme, ...props }) => {
                 transform: 'translate(-50%, -50%)'
             }}>
             <tools.list component="nav" className={classes.root} aria-label="Options" >
-                <Link to="/temporadas" className={classes.textLink}><tools.ListItem button >
-                    <tools.ListItemIcon>
-                        <tableIcons.FormatListNumberedIcon style={{ 'color': 'SkyBlue' }} />
-                    </tools.ListItemIcon>
-                    <tools.ListItemText inset primary="Temporadas" />
-                </tools.ListItem>
+                <Link to="/temporadas" className={classes.textLink}>
+                    <tools.ListItem button >
+                        <tools.ListItemIcon>
+                            <tableIcons.FormatListNumberedIcon style={{ 'color': 'SkyBlue' }} />
+                        </tools.ListItemIcon>
+                        <tools.ListItemText inset primary="Temporadas" />
+                    </tools.ListItem>
                 </Link>
                 <tools.ListItem button>
-                    <tools.ListItemIcon>
-                        <tableIcons.PeopleAltIcon style={{ 'color': 'SkyBlue' }} />
-                    </tools.ListItemIcon>
-                    <tools.ListItemText inset primary="Personajes" />
+                    <Link to="/personajes" className={classes.textLink}>
+                        <tools.ListItemIcon>
+                            <tableIcons.PeopleAltIcon style={{ 'color': 'SkyBlue' }} />
+                        </tools.ListItemIcon>
+                        <tools.ListItemText inset primary="Personajes" />
+                    </Link>
                 </tools.ListItem>
                 <tools.ListItem button>
-                    <tools.ListItemIcon>
-                        <tableIcons.EmojiPeopleIcon style={{ 'color': 'IndianRed' }} />
-                    </tools.ListItemIcon>
-                    <tools.ListItemText inset primary="Asesinos" />
+                    <Link to="/personajes" className={classes.textLink}>
+                        <tools.ListItemIcon>
+                            <tableIcons.EmojiPeopleIcon style={{ 'color': 'IndianRed' }} />
+                        </tools.ListItemIcon>
+                        <tools.ListItemText inset primary="Asesinos" />
+                    </Link>
                 </tools.ListItem>
             </tools.list>
         </header>

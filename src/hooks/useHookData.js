@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import /*React,*/ { useEffect, useState } from 'react';
 import axios from 'axios';
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
 export const useGetData = (apiUrl) => {
     const [data, setData] = useState([]);
     console.log(apiUrl);
@@ -12,7 +12,7 @@ export const useGetData = (apiUrl) => {
             .catch((error) => {
                 console.error(error);
             })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
     return data || [];
 };

@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React/*,{ useContext }*/ from 'react';
 import PropTypes from 'prop-types';
 import { Listado } from '../../components/Listado/Listado';
 //import useGetUsers from '../hooks/users/useGetUsers'
 import { Switch, Route } from 'react-router';
-import { themeContext, withTheme } from '../../Theme/Theme';
+import { /*themeContext, */withTheme } from '../../Theme/Theme';
 
 export const Section = ({ type, theme }) => {
 
@@ -16,17 +16,7 @@ export const Section = ({ type, theme }) => {
     return (
         <div>
             <header className="App-header" style={{ 'backgroundColor': theme.dark ? 'black' : 'white' }}>
-                <Switch>
-                    <Route path="/user2/:id">
-                        <></>
-                    </Route>
-                </Switch>
-                <Listado type={type}>
-
-                </Listado>
-                {
-
-                }
+                <Listado type={type}></Listado>
 
             </header>
         </div>);
@@ -35,7 +25,7 @@ export const Section = ({ type, theme }) => {
 export const SectionWithTheme = withTheme(Section);
 
 Section.propTypes = {
-
+    type: PropTypes.string.isRequired
 }
 
 Section.defaultProps = {

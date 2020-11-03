@@ -1,82 +1,58 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment/*, useState*/ } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from "material-table";
-import ReactDOM from "react-dom";
-import { useHistory } from "react-router-dom";
+//import ReactDOM from "react-dom";
+import { useHistory, useParams } from "react-router-dom";
 // icons
 import { tableIcons } from '../icons';
 
 import { ROOT_URLs } from '../../App'
 import { useGetData } from "../../hooks/useHookData";
+import { generarDataListado } from "../functions";
 
 
-export const Listado = ({ type }) => {
+export const Listado = ({ type, dataParam }) => {
 
     const history = useHistory();
+    const { id } = useParams();
+    //generarDataListado(type, id); // devuelve objeto para poner en listado
 
-    let data = useGetData(ROOT_URLs.api + 'episodes')
+    let paramGet = '';
+    switch (type) {
+        case 'personajes':
+            paramGet = ROOT_URLs.api + 'characters';
+            break;
+        case 'dataPasada':
+            break;
 
-    console.log(data);
-
-    let dataObj = {};
-    let actions = [];
-
-    if (type === 'temporadas') {
-        let dataGet = data.reduce((newTempArr, el) => ((newTempArr.includes(el.season.trim())) ? newTempArr : [...newTempArr, el.season]), [])
-        console.log(dataGet);
-        // data = { seasons: dataGet, data: [...data] }
-        // console.log(data);
-
-        // dataObj = data.data.map((obj, i) => {
-        // return {
-        // episode: obj.episode,
-        // episode_id: obj.episode_id,
-        // season: obj.season,
-        // title: obj.title,
-        // seasons: data.seasons
-
-        // }
-        // })
-        // console.log(dataObj);
-        // data = Array.from(dataObj);
-        data = dataGet.map((obj) => {
-            return {
-                season: 'Temporada ' + obj
-            }
-        })
-
-        actions = [
-            {
-                icon: tableIcons.VisibilityIcon,
-                tooltip: "Ir a los episodios de la temporada",
-                onClick: (event, rowData) => {
-                    history.push('/temporada/' + parseInt(rowData.tableData.id + 1))
-                }
-            },
-        ];
+        default:
+            paramGet = ROOT_URLs.api + 'episodes';
     }
+    console.log(paramGet);
+    let data = useGetData(paramGet)
 
 
+    console.log(id);
+    console.log(data);
+    // devuelve objeto para poner en listado
+    const obj = generarDataListado(type, id, dataParam || data, history);
 
-
-
-
+    // if (obj) {
     return (
         <Fragment>
             <MaterialTable
                 icons={tableIcons}
-                columns={[
-                    { title: 'Temporada', field: 'season' },
-
-                ]}
-                data={data}
-                actions={actions}
-                title={type + ' list'}
+                columns={obj.columns}
+                data={obj.data}
+                actions={obj.actions}
+                title={type[0].toUpperCase() + type.slice(1) + ' list'}
             />
         </Fragment>
-        //<></>
     );
-};
+    // } else {
+    //document.location.reload();
+}
+    ;
 
 Listado.propTypes = {
     type: PropTypes.string.isRequired

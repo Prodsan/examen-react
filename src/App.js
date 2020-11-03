@@ -1,22 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import { Four0Four } from './pages/Four0Four';
 import { ThemeSelector } from './components/ThemeSelector/ThemeSelector';
-import { Index, IndexWithTheme } from './pages/Index';
-import { Listado } from './components/Listado/Listado';
+import { IndexWithTheme } from './pages/Index';
 import { SectionWithTheme } from './pages/Section/Section';
+import { DetEpWithTheme } from './pages/det-ep.jsx';
+// bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { DetPersWithTheme } from './pages/det-pers';
 
 export const ROOT_URLs = {
   api: 'https://breakingbadapi.com/api/'
 }
 
-const strings = { temporadas: 'temporadas', personajes: 'personajes', asesinos: 'asesinos' };
+const strings = {
+  temporadas: {
+    name: 'temporadas',
+    episodios: {
+      name: 'episodios',
+      detalle: {
+        name: 'ep-detalle'
+      }
+    }
+  },
+  personajes: {
+    name: 'personajes'
+  },
+  asesinos: {
+    name: 'asesinos'
+  },
+};
 const PageRouter = () => (
   <Router>
     <Switch>
@@ -24,10 +41,19 @@ const PageRouter = () => (
         <IndexWithTheme />
       </Route>
       <Route path="/temporadas" exact>
-        <SectionWithTheme type={strings.temporadas} />
+        <SectionWithTheme type={strings.temporadas.name} />
+      </Route>
+      <Route path="/personajes" exact>
+        <SectionWithTheme type={strings.personajes.name} />
       </Route>
       <Route path="/temporada/:id" exact>
-        <></>
+        <SectionWithTheme type={strings.temporadas.episodios.name} />
+      </Route>
+      <Route path="/personaje/:id" exact>
+        <DetPersWithTheme />
+      </Route>
+      <Route path="/ep-detalle/:id" exact>
+        <DetEpWithTheme />
       </Route>
       <Route >
         <Four0Four />
